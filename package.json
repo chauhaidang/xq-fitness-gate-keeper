@@ -35,12 +35,12 @@
   "license": "ISC",
   "dependencies": {
     "@playwright/test": "^1.40.0",
+    "dotenv": "^17.2.3",
     "xq-fitness-write-client": "file:./generated-clients/write-service",
     "xq-fitness-read-client": "file:./generated-clients/read-service"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
-    "dotenv": "^17.2.3",
     "typescript": "^5.5.4"
   }
 }
