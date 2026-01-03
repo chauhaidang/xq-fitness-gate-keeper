@@ -1,5 +1,5 @@
 {
-  "name": "@xq-fitness/gate-keeper",
+  "name": "@chauhaidang/gate-keeper",
   "version": "0.1.0",
   "description": "API automation testing framework - install globally with npm",
   "main": "index.js",
@@ -33,26 +33,6 @@
   ],
   "author": "XQ Fitness Team",
   "license": "ISC",
-  "pkg": {
-    "scripts": [
-      "bin/**/*.js",
-      "node_modules/@playwright/test/**/*.js"
-    ],
-    "assets": [
-      "tests/**/*.ts",
-      "fixtures/**/*.ts",
-      "playwright.config.ts",
-      "tsconfig.json",
-      "generated-clients/**/*",
-      "node_modules/@playwright/test/**/*"
-    ],
-    "targets": [
-      "node18-linux-x64",
-      "node18-macos-x64",
-      "node18-win-x64"
-    ],
-    "outputPath": "dist"
-  },
   "dependencies": {
     "@playwright/test": "^1.40.0",
     "xq-fitness-write-client": "file:./generated-clients/write-service",
@@ -61,7 +41,6 @@
   "devDependencies": {
     "@types/node": "^22.5.0",
     "dotenv": "^17.2.3",
-    "pkg": "^5.8.1",
     "typescript": "^5.5.4"
   }
 }

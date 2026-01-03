@@ -2,7 +2,6 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
-// Load .env file from api-tests-poc directory
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
