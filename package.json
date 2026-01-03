@@ -1,0 +1,31 @@
+{
+  "name": "xq-fitness-api-tests-poc",
+  "version": "0.1.0",
+  "description": "Playwright POC for API automation testing framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
+  },
+  "keywords": [
+    "playwright",
+    "api-testing",
+    "e2e",
+    "workflow-testing"
+  ],
+  "author": "XQ Fitness Team",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^22.5.0",
+    "dotenv": "^17.2.3",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "xq-fitness-write-client": "file:./generated-clients/write-service",
+    "xq-fitness-read-client": "file:./generated-clients/read-service"
+  }
+}
