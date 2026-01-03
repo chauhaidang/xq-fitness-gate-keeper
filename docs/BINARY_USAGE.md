@@ -54,11 +54,12 @@ chmod +x gate-keeper
 ### Custom Base URL
 
 ```bash
-# Via command line option
-./gate-keeper --base-url=http://api.example.com test
-
 # Via environment variable
 API_BASE_URL=http://api.example.com ./gate-keeper test
+
+# Or set in shell
+export API_BASE_URL=http://api.example.com
+./gate-keeper test
 ```
 
 ### All Playwright Options Supported
@@ -99,7 +100,7 @@ curl -L https://github.com/your-org/gate-keeper/releases/download/v1.0.0/gate-ke
 chmod +x gate-keeper
 
 # Consumer runs tests
-./gate-keeper --base-url=http://api.example.com test --grep @smoke
+API_BASE_URL=http://api.example.com ./gate-keeper test --grep @smoke
 ```
 
 ### Option 2: npm Package Distribution
@@ -113,8 +114,8 @@ npm publish
 Consumers install:
 
 ```bash
-npm install -g @xq-fitness/gate-keeper
-gate-keeper test --grep "Create Routine"
+npm install -g @chauhaidang/gate-keeper
+xq-keeper test --grep "Create Routine"
 ```
 
 ### Option 3: Docker Image
@@ -139,12 +140,10 @@ ENTRYPOINT ["gate-keeper"]
     chmod +x gate-keeper
 
 - name: Run API Tests
+  env:
+    API_BASE_URL: ${{ env.API_URL }}
   run: |
-    ./gate-keeper \
-      --base-url=${{ env.API_URL }} \
-      --grep "@smoke" \
-      --reporter=json \
-      --workers=2
+    ./gate-keeper test --grep "@smoke" --reporter=json --workers=2
 ```
 
 ### GitLab CI
@@ -154,7 +153,7 @@ test:
   script:
     - curl -L https://github.com/your-org/gate-keeper/releases/download/v1.0.0/gate-keeper-linux -o gate-keeper
     - chmod +x gate-keeper
-    - ./gate-keeper --base-url=$API_URL test --grep @smoke
+    - API_BASE_URL=$API_URL ./gate-keeper test --grep @smoke
 ```
 
 ## How It Works
@@ -171,11 +170,9 @@ The binary includes:
 ### Playwright Execution
 
 The binary wrapper:
-1. Parses command-line arguments
-2. Extracts custom options (like `--base-url`)
-3. Passes remaining args to Playwright CLI
-4. Sets environment variables
-5. Executes Playwright
+1. Passes all arguments directly to Playwright CLI
+2. Sets `API_BASE_URL` environment variable (defaults to `http://localhost:8080`)
+3. Executes Playwright with the provided arguments
 
 ### Playwright Availability
 

@@ -7,7 +7,7 @@ The simplest way to use XQ Keeper is via npm global installation.
 ### Install Globally
 
 ```bash
-npm install -g @xq-fitness/gate-keeper
+npm install -g @chauhaidang/gate-keeper
 ```
 
 This installs:
@@ -34,8 +34,8 @@ xq-keeper
 xq-keeper test --grep "Create Routine"
 xq-keeper test --project=api-tests --workers=4
 
-# Custom base URL
-xq-keeper --base-url=http://api.example.com test --grep @smoke
+# Custom base URL via environment variable
+API_BASE_URL=http://api.example.com xq-keeper test --grep @smoke
 ```
 
 ## How It Works
@@ -57,13 +57,13 @@ When you install globally:
 ## Updating
 
 ```bash
-npm update -g @xq-fitness/gate-keeper
+npm update -g @chauhaidang/gate-keeper
 ```
 
 ## Uninstalling
 
 ```bash
-npm uninstall -g @xq-fitness/gate-keeper
+npm uninstall -g @chauhaidang/gate-keeper
 ```
 
 ## Local Installation (Alternative)
@@ -71,7 +71,7 @@ npm uninstall -g @xq-fitness/gate-keeper
 You can also install locally in a project:
 
 ```bash
-npm install --save-dev @xq-fitness/gate-keeper
+npm install --save-dev @chauhaidang/gate-keeper
 npx xq-keeper test
 ```
 
@@ -81,15 +81,13 @@ npx xq-keeper test
 
 ```yaml
 - name: Install XQ Keeper
-  run: npm install -g @xq-fitness/gate-keeper
+  run: npm install -g @chauhaidang/gate-keeper
 
 - name: Run API Tests
+  env:
+    API_BASE_URL: ${{ env.API_URL }}
   run: |
-    xq-keeper \
-      --base-url=${{ env.API_URL }} \
-      test \
-      --grep "@smoke" \
-      --workers=2
+    xq-keeper test --grep "@smoke" --workers=2
 ```
 
 ### GitLab CI
@@ -97,9 +95,9 @@ npx xq-keeper test
 ```yaml
 test:
   before_script:
-    - npm install -g @xq-fitness/gate-keeper
+    - npm install -g @chauhaidang/gate-keeper
   script:
-    - xq-keeper --base-url=$API_URL test --grep @smoke
+    - API_BASE_URL=$API_URL xq-keeper test --grep @smoke
 ```
 
 ## Troubleshooting
@@ -121,8 +119,8 @@ export PATH="$(npm config get prefix)/bin:$PATH"
 If you see Playwright errors, reinstall:
 
 ```bash
-npm uninstall -g @xq-fitness/gate-keeper
-npm install -g @xq-fitness/gate-keeper
+npm uninstall -g @chauhaidang/gate-keeper
+npm install -g @chauhaidang/gate-keeper
 ```
 
 ### Permission Errors
@@ -130,7 +128,7 @@ npm install -g @xq-fitness/gate-keeper
 On Linux/macOS, you may need `sudo`:
 
 ```bash
-sudo npm install -g @xq-fitness/gate-keeper
+sudo npm install -g @chauhaidang/gate-keeper
 ```
 
 Or configure npm to use a different directory (recommended):
@@ -139,6 +137,26 @@ Or configure npm to use a different directory (recommended):
 mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
 export PATH=~/.npm-global/bin:$PATH
-npm install -g @xq-fitness/gate-keeper
+npm install -g @chauhaidang/gate-keeper
 ```
+
+## Environment Variables
+
+### API_BASE_URL
+
+The API base URL can be configured via the `API_BASE_URL` environment variable:
+
+```bash
+# Set for single command
+API_BASE_URL=http://api.example.com xq-keeper test
+
+# Set in shell session
+export API_BASE_URL=http://api.example.com
+xq-keeper test
+
+# Default value
+xq-keeper test  # Uses http://localhost:8080
+```
+
+The default value is `http://localhost:8080` if not specified.
 

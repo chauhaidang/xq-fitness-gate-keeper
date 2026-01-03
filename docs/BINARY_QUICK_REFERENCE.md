@@ -41,8 +41,7 @@ chmod +x gate-keeper
 
 ### Set Custom Base URL
 ```bash
-./gate-keeper --base-url=http://api.example.com test
-# or
+# Use environment variable
 API_BASE_URL=http://api.example.com ./gate-keeper test
 ```
 
@@ -78,11 +77,10 @@ API_BASE_URL=http://api.example.com ./gate-keeper test
 ./gate-keeper test --grep "routine" --project=api-tests --workers=2
 
 # Custom URL with filters
-./gate-keeper --base-url=http://staging.example.com test --grep @smoke
+API_BASE_URL=http://staging.example.com ./gate-keeper test --grep @smoke
 
 # Full example
-./gate-keeper \
-  --base-url=http://api.example.com \
+API_BASE_URL=http://api.example.com ./gate-keeper \
   test \
   --grep "Create" \
   --project=api-tests \

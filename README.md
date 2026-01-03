@@ -1,8 +1,7 @@
 # Gate Keeper - API Automation Testing
 
-**Status**: Proof of Concept  
-**Version**: 0.1.0  
-**Framework**: Playwright with Generated API Clients
+[![Build and Publish](https://github.com/chauhaidang/xq-fitness-gate-keeper/actions/workflows/publish.yml/badge.svg)](https://github.com/chauhaidang/xq-fitness-gate-keeper/actions/workflows/publish.yml)
+
 
 ## Overview
 
@@ -10,16 +9,16 @@ API automation testing framework using **Playwright** with **generated TypeScrip
 
 ## Features
 
-- ✅ Playwright API testing with custom fixtures
-- ✅ Generated API clients for type safety (read & write services)
-- ✅ Multi-step workflow tests
-- ✅ Response validation with Playwright's expect API
-- ✅ Automatic cleanup using try/finally blocks
-- ✅ Playwright HTML reports
-- ✅ Full TypeScript type safety (autocomplete, compile-time checks)
-- ✅ **Binary distribution support** - Package as single executable for easy distribution
+- Playwright API testing with custom fixtures
+- Generated API clients for type safety (read & write services)
+- Multi-step workflow tests
+- Response validation with Playwright's expect API
+- Automatic cleanup using try/finally blocks
+- Playwright HTML reports
+- Full TypeScript type safety (autocomplete, compile-time checks)
+- **npm Global Installation** - Install globally and use from anywhere
 
-## Quick Start
+-Quick Start
 
 ### Prerequisites
 
@@ -93,18 +92,20 @@ test('Create Routine', async ({ xqWrite, xqRead }) => {
 
 ```bash
 # Install globally
-npm install -g @xq-fitness/gate-keeper
+npm install -g @chauhaidang/gate-keeper
 
 # Use from anywhere
 xq-keeper test --grep "Create Routine"
-xq-keeper --base-url=http://api.example.com test --grep @smoke
+
+# With custom API URL
+API_BASE_URL=http://api.example.com xq-keeper test --grep @smoke
 ```
 
 ### Local Installation
 
 ```bash
 # Install in your project
-npm install --save-dev @xq-fitness/gate-keeper
+npm install --save-dev @chauhaidang/gate-keeper
 
 # Use with npx
 npx xq-keeper test
@@ -139,10 +140,8 @@ See **[Binary Usage Guide](./docs/BINARY_USAGE.md)** for binary distribution det
 
 ```
 gate-keeper/
-├── bin/                   # Binary entry point
+├── bin/                   # CLI entry point
 │   └── run-tests.js      # CLI wrapper
-├── lib/                   # Library code
-│   └── playwright-wrapper.js  # Playwright execution wrapper
 ├── docs/                  # Documentation
 ├── fixtures/              # Playwright custom fixtures
 │   └── api-clients.ts    # Generated client fixtures
