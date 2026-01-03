@@ -1,13 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
-
-// Define __dirname for ESM compatibility (Node.js 20.11.0+)
-// Playwright loads this file as ESM at runtime, so import.meta.dirname is available
-// @ts-expect-error - TypeScript sees this as CommonJS, but Playwright loads it as ESM
-const __dirname = import.meta.dirname;
-
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+import { defineConfig } from '@playwright/test';
 
 /**
  * Playwright configuration for API testing POC
