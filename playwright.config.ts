@@ -21,7 +21,7 @@ export default defineConfig({
     ['json', { outputFile: 'reports/test-results.json' }],
   ],
   use: {
-    baseURL: process.env.API_BASE_URL || 'http://localhost:8080/xq-fitness-write-service/api/v1',
+    baseURL: process.env.API_BASE_URL || 'http://localhost:8080',
     trace: 'on-first-retry',
     // API tests don't need browser context
   },
